@@ -8,11 +8,9 @@ import scala.annotation.tailrec
  * Representa a Game Engine do GoL 
  * 
  * @author Breno Xavier (baseado na implementacao Java de rbonifacio@unb.br
+ * Modificações feitas por David Potolski -> conforme especificações dadas pelo professor Rodrigo Bonifacio
  */
-object GameEngine {
-  
-  
-  ModeloStrategy.Set(1);
+abstract class GameEngine {
   
   val height = Main.height
   val width = Main.width
@@ -48,10 +46,10 @@ object GameEngine {
     
     for(i <- (0 until height)) {
       for(j <- (0 until width)) {
-        if(ModeloStrategy.modelo.shouldRevive(i, j)) {
+        if(shouldRevive(i, j)) {
           mustRevive += cells(i)(j)
         }
-        else if((!ModeloStrategy.modelo.shouldKeepAlive(i, j)) && cells(i)(j).isAlive) {
+        else if((!shouldKeepAlive(i, j)) && cells(i)(j).isAlive) {
           mustKill += cells(i)(j)
         }
       }
@@ -113,15 +111,7 @@ object GameEngine {
       throw new IllegalArgumentException
     }
   }
-    private def shouldKeepAlive(i: Int, j: Int): Boolean = {
-      (GameEngine.cells(i)(j).isAlive) &&
-      (GameEngine.numberOfNeighborhoodAliveCells(i, j) == 2 || GameEngine.numberOfNeighborhoodAliveCells(i, j) == 3)
-    }
   
-    private  def shouldRevive(i: Int, j: Int): Boolean = {
-      (!GameEngine.cells(i)(j).isAlive) && 
-      (GameEngine.numberOfNeighborhoodAliveCells(i, j) == 3)
-    }
   
   /**
 	 * Retorna o numero de celulas vivas no ambiente. 
@@ -139,10 +129,19 @@ object GameEngine {
     }
   }
   
- /** Computa o numero de celulas vizinhas vivas, dada uma posicao no ambiente
+  
+  /* As condições para essa função são ditadas no objeto GameEngineconcreta como especificado pelo professor para o modelo Template Method*/
+  protected def  shouldKeepAlive(i: Int, j: Int): Boolean 
+  
+  /* As condições para essa função são ditadas no objeto GameEngineconcreta como especificado pelo professor para o modelo Template Method*/
+  protected def  shouldRevive(i: Int, j: Int): Boolean 
+
+  
+  /*
+	 * Computa o numero de celulas vizinhas vivas, dada uma posicao no ambiente
 	 * de referencia identificada pelos argumentos (i,j).
-	*/
-  def numberOfNeighborhoodAliveCells(i: Int, j: Int): Int = {
+	 */
+  protected def numberOfNeighborhoodAliveCells(i: Int, j: Int): Int = {
     var alive = 0
     for(a <- (i - 1 to i + 1)) {
       for(b <- (j - 1 to j + 1)) {
