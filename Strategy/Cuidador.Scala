@@ -1,4 +1,4 @@
-package GoL
+package br.unb.cic.poo.gol
 
 import scala.collection.mutable.ListBuffer
 
