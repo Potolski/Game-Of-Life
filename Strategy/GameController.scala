@@ -9,6 +9,17 @@ object GameController {
   
   def start {
     GameView.update
+    CellsCaretaker.persist
+  }
+
+
+
+  def repManager(line: Int, column: Int, veredict: Boolean ): Unit = {
+    if (veredict) {
+      CellsRepository(line, column).revive
+    } else {
+      CellsRepository(line, column).kill
+    }
   }
   
   def halt() {
@@ -34,5 +45,32 @@ object GameController {
     GameEngine.nextGeneration
     GameView.update
   }
-  
+	
+  def goBack: Unit = {
+	CellsCaretaker.undo
+	View.updateChart
+
+  }
+	
+  def goFoward: Unit = {
+
+    CellsCaretaker.redo
+    View.updateChart
+
+  }
+
+  def clear: Unit = {
+
+    CellsCaretaker.clear
+    CellsRepository.clear
+    View.updateChart
+  }
+
+
+
+  def memory: Unit ={
+
+    CellsCaretaker.persist
+
+  }
 }
