@@ -8,25 +8,25 @@ object CuidadorCelulas {
   private var current = -1
   
   def persist: Unit = {
-    cellsMementos += Repositorio.salvar
+    cellsMementos += Repositorio_cells.salvar
     current += 1
   }
   
   def undo: Unit = {
     if (validMemento(current - 1)) {
       current -= 1
-      Repositorio.restaura(cellsMementos(current))
+      Repositorio_cells.restaura(cellsMementos(current))
     } else {
-      Repositorio.restaura(cellsMementos(0))
+      Repositorio_cells.restaura(cellsMementos(0))
     }
   }
 
   def redo: Unit = {
     if (validMemento(current + 1)) {
       current += 1
-      Repositorio.restaura(cellsMementos(current))
+      Repositorio_cells.restaura(cellsMementos(current))
     } else {
-      Repositorio.restaura(cellsMementos.last)
+      Repositorio_cells.restaura(cellsMementos.last)
     }
   }
 
