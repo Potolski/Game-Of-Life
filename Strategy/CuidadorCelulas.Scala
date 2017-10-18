@@ -2,7 +2,7 @@ package br.unb.cic.poo.gol
 
 import scala.collection.mutable.ListBuffer
 
-object Cuidador {
+object CuidadorCelulas {
   val cellsMementos = new ListBuffer[CellsMemento]
   
   private var current = -1
