@@ -1,4 +1,4 @@
-
+package br.unb.cic.poo.gol
 
 class CellsMemento(height: Int, width: Int, cells: Array[Array[Cell]]) {
 
