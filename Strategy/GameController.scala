@@ -8,6 +8,7 @@ package br.unb.cic.poo.gol
 object GameController {
   
   def start {
+    clear
     GameView.update
     CellsCaretaker.persist
   }
@@ -66,11 +67,7 @@ object GameController {
     View.updateChart
   }
 
-
-
   def memory: Unit ={
-
     CellsCaretaker.persist
-
   }
 }
