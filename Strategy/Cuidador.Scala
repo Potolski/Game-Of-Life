@@ -6,7 +6,7 @@ import scala.collection.mutable.ListBuffer
   * Contract for implementation of a Keeper of Mementos
   */
   
-trait Caretaker[Memento] {
+trait Cuidador[Memento] {
   val mementosRepository: ListBuffer[Memento]
   
   protected var current: Int = -1
